@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 
+import Persons from './Persons';
+import PersonForm from './PersonForm';
+import Filter from './Filter';
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
@@ -13,8 +17,8 @@ const App = () => {
   const [filtered, setFiltered] = useState([{}])
 
 const newNameHandler = (event) => {
-  event.preventDefault();
-  setNewName(event.target.value)
+    event.preventDefault();
+    setNewName(event.target.value)
 
 }
 
@@ -43,39 +47,25 @@ const inputHandler = (event) =>{
 const filterHandler = (event) => {
   event.preventDefault()
   setValue(event.target.value)
-
-  const str = persons.filter(person => person.name.toLowerCase().includes(inputValue.toLowerCase()))
-  setFiltered(str)
-
-  console.log(filtered)
- 
+  setFiltered(persons.filter(person => person.name.toLowerCase().includes(inputValue.toLowerCase())))
 }
 
-const data = person => <p key={person.name}>{person.name} {person.number}</p>
+//Variable for showing .map results
+const data = person => <Persons key={person.name} name={person.name} number={person.number}/>
 
 
 
-  return (
-    <div>
-      <h2>Phonebook</h2>
+return (
+  <div>
+    <h2>Phonebook</h2>
 
-      <div>
-        Filter show with <input value={inputValue} onChange={filterHandler}/>
-      </div>
-      <form onSubmit={inputHandler}>
-        <div>
-          name: <input value={newName} onChange={newNameHandler}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={newNumberHandler} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
+    <Filter inputValue={inputValue} filterHandler={filterHandler}/>
 
-  {inputValue === '' ? persons.map(data) : filtered.map(data) } 
+    <PersonForm inputHandler={inputHandler} newName={newName} newNameHandler={newNameHandler} newNumberHandler={newNumberHandler} newNumber={newNumber} />
+
+    <h2>Numbers</h2>
+
+    {inputValue === '' ? persons.map(data) : filtered.map(data) } 
    
     </div>
   )
