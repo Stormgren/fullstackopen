@@ -1,7 +1,8 @@
 import React from 'react'
 import ContactDetails from './ContactDetails'
+import axios from 'axios'
 
-    const Contacts = ({ search, persons, searchRes }) => {
+    const Contacts = ({ search, persons, searchRes, removeContact }) => {
         let currentPersons = null;
         if (search) {
           currentPersons = persons.filter(person => {
@@ -12,9 +13,11 @@ import ContactDetails from './ContactDetails'
         } else {
           currentPersons = [...persons];
         }
-    
+
         return currentPersons.map(person => (
-            <ContactDetails key={person.name} name={person.name} number={person.number} />
+            <ContactDetails 
+            removeContact={() => removeContact(person.id, person.name)} 
+            key={person.id} id={person.id} name={person.name} number={person.number} />
         ));
       };
   
