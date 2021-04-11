@@ -4,6 +4,8 @@ import Search from './components/Search'
 import Form from './components/Form'
 import Contacts from './components/Contacts'
 import personService from './services/personService'
+import Notification from './components/Notification'
+
 
 const App = () => {
   
@@ -12,6 +14,7 @@ const App = () => {
   const [ newNumber, setNewNumber] = useState('')
   const [ search, setSearch] = useState(false)
   const [searchRes, setSearchRes] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     console.log('effect')
@@ -34,9 +37,16 @@ const App = () => {
     
     if(arr.length === 0) { 
       personService.create(nameObject).then(response => {
-      setPersons(persons.concat(response.data))    
+      setPersons(persons.concat(response.data))
+
     setNewName('')
     setNewNumber('')
+
+    setMessage(`Contact ${nameObject.name} has been added`)
+
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000)
   })}  else {
        console.log(nameObject.number)
         if(window.confirm(`${nameObject.name} already exists, do you want to update number?`))
@@ -95,6 +105,7 @@ const App = () => {
       <Search searchRes={searchRes} searchHandler={searchHandler}/>
 
      <h2>Phonebook</h2>
+     <Notification message={message}/>
      <Form 
      formHandler={formHandler}
      newName={newName}
