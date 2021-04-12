@@ -5,7 +5,7 @@ import Form from './components/Form'
 import Contacts from './components/Contacts'
 import personService from './services/personService'
 import Notification from './components/Notification'
-
+import Error from './components/Error'
 
 const App = () => {
   
@@ -15,6 +15,7 @@ const App = () => {
   const [ search, setSearch] = useState(false)
   const [searchRes, setSearchRes] = useState('')
   const [message, setMessage] = useState(null)
+  const [errorMsg, setErrorMsg] = useState(null)
 
   useEffect(() => {
     console.log('effect')
@@ -58,7 +59,18 @@ const App = () => {
             setPersons(
               persons.filter(n => (n.name === newName ? res : n))
             );
-          })
+          }).catch((error) => {
+      
+            setErrorMsg(`Contact ${nameObject.name} has been removed`)
+        
+            setTimeout(() => {
+              setErrorMsg(null)
+            }, 5000)
+        
+              setNewName("");
+              setNewNumber("");
+        
+            })
         }
      
     }
@@ -89,6 +101,7 @@ const App = () => {
   const removeContact = (id, name) => {       
     const url = `http://localhost:3001/persons/${id}`
     const confirmation = window.confirm(`Are you sure you want to delete ${name}?`)
+    
     if (confirmation){
         axios.delete(url)
     .then(() => {
@@ -105,6 +118,7 @@ const App = () => {
       <Search searchRes={searchRes} searchHandler={searchHandler}/>
 
      <h2>Phonebook</h2>
+     <Error errorMsg={errorMsg}/>
      <Notification message={message}/>
      <Form 
      formHandler={formHandler}

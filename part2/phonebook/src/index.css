@@ -6,3 +6,12 @@
     border-radius: 5px;
     padding: 10px;
   }
+
+  .error {
+    color: red;
+    background:lightcoral;
+    font-size: 25px;
+    border: solid red 5px;
+    border-radius: 5px;
+    padding: 10px;
+  }
