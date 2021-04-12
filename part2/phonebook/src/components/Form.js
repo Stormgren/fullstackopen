@@ -3,13 +3,15 @@ import React from 'react'
 const Form = ( { formHandler, newName, nameHandler, newNumber, numberHandler }) => {
     return (
         <form onSubmit={formHandler}>
-        <div>
+       
+        <div className="form-element">
           name: <input 
           value={newName}
           onChange={nameHandler}
-          />
-        </div>
-        <div>number: <input 
+          /></div>
+          
+        <div className="form-element">
+          number: <input 
         value={newNumber}
         onChange={numberHandler}
         /></div>

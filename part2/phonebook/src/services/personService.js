@@ -3,13 +3,18 @@ import axios from 'axios';
 const baseUrl = 'http://localhost:3001/persons';
 
 const getAll = () => {
-    const request = axios.get(baseUrl);
-    return request
+    return axios.get(baseUrl);
 }
 
 const create = newPerson => {
-    const request = axios.post(baseUrl, newPerson);
-    return request
+    return axios.post(baseUrl, newPerson);
 }
 
-export default { getAll, create }
+const update = (id, newObject) => {
+return axios.put(`${baseUrl}/${id}`, newObject)
+}
+
+//Created variable to remove Assign object to a variable before exporting as module default warning
+const personService = { getAll, create, update }
+
+export default personService

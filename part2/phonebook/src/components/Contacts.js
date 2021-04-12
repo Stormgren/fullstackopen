@@ -1,9 +1,10 @@
 import React from 'react'
 import ContactDetails from './ContactDetails'
-import axios from 'axios'
 
     const Contacts = ({ search, persons, searchRes, removeContact }) => {
+
         let currentPersons = null;
+        
         if (search) {
           currentPersons = persons.filter(person => {
             return (

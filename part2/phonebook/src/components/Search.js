@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Search = ( { searchRes, searchHandler }) => {
+  
     return (
         <div>
         Filter shown with
