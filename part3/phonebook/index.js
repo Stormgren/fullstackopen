@@ -1,9 +1,27 @@
 const { request, response } = require('express');
 const express = require('express')
+const morgan = require('morgan')
+
 const app = express();
 
 app.use(express.json())
 
+// Morgan for usage with tiny configuration
+// app.use(morgan('tiny'))
+
+
+//Morgan for use with POST requests
+
+morgan.token('body', (request, response) => {
+    return JSON.stringify(request.body)
+})
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+
+
+// morgan.token('body', function getBody (req) {
+//     return req.body
+//   })
 
 let persons = [
     {
@@ -99,6 +117,7 @@ app.post('/api/persons', (request, response) => {
     console.log(persons)
     response.json(personObject)
 })
+
 
 app.get('/info', (request, response) => {
     const amount = persons.length
