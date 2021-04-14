@@ -1,0 +1,30 @@
+.form-element{
+  margin-bottom: 10px;
+}
+
+.numbers-header{
+  background: black;
+  color: white;
+  padding: 5px;
+}
+
+.msg {
+    color: green;
+    background: lightgrey;
+    font-size: 25px;
+    border: solid green 5px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .error {
+    color: red;
+    background:lightcoral;
+    font-size: 25px;
+    border: solid red 5px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+  }
