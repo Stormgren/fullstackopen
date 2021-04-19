@@ -88,12 +88,12 @@ app.get('/api/persons/:id', (request, response) => {
 //     }
 // }
 
-app.post('/api/persons', (request, response) => {
-    const body = request.body
+// app.post('/api/persons', (request, response) => {
+//     const body = request.body
 
-    if(body.name === undefined){
-        return response.status(404).json({error: 'Content is missing'})
-    }
+//     if(body.name === undefined){
+//         return response.status(404).json({error: 'Content is missing'})
+//     }
 
     // if(!body.name){
     //     return response.status(400).json({
@@ -109,20 +109,36 @@ app.post('/api/persons', (request, response) => {
     //         error: `${body.name} already exists`
     //     })
     // }
-    console.log('body content is ')
-    console.log(body)
-    const contact = new Person({
-        name: body.name,
-        number: body.number
-  })
+//     console.log('body content is ')
+//     console.log(body)
 
-    contact.save().then(savedContact => {
-        console.log(savedContact)
-        response.json(savedContact)
+//     const contact = new Person({
+//         name: body.name,
+//         number: body.number
+//   })
+
+//     contact.save().then(savedContact => {
+//         console.log(savedContact)
+//         response.json(savedContact)
+//     })
+// })
+
+app.post('/api/persons', (request, response) => {
+    const body = request.body
+  
+    if (body.name === undefined) {
+      return response.status(400).json({ error: 'content missing' })
+    }
+  
+    const contactData = new Person({
+      name: body.name,
+      number: body.number 
     })
-})
-
-
+  
+    contactData.save().then(savedNote => {
+      response.json(savedNote)
+    })
+  })
 
 app.get('/info', (request, response) => {
     const amount = Person.length
