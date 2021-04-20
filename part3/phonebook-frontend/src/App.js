@@ -54,14 +54,14 @@ const App = () => {
         const updatedNumber = persons.find((person) => person.name === newName);
 
         personService
-          .update(updatedNumber.id, { ...updatedNumber, number: newNumber })
-          .then((res) => {
-            setPersons(
-              persons.filter((person) =>
-                person.name === newName ? res : person
-              )
-            );
-          })
+        .update(updatedNumber.id, { ...updatedNumber, number: newNumber })
+        .then((res) => {
+          setPersons(
+            persons.filter((person) =>
+              person.name === newName ? res : person
+            )
+          );
+        })
           .catch((error) => {
             setErrorMsg(`Contact ${nameObject.name} has been removed`);
 

@@ -64,6 +64,24 @@ app.post('/api/persons', (request, response) => {
     })
   })
 
+app.put('/api/persons/:id', (request, response, next) => {
+  const body = request.body
+
+  const contact = {
+ 
+    number: body.number
+  }
+
+  Person.findByIdAndUpdate(request.params.id, contact, { new: true })
+  .then(updatedContact => {
+      response.json(updatedContact)
+  }).catch(error => {
+    next(error)
+  })
+})
+
+
+
 app.get('/info', (request, response) => {
     const amount = Person.length
     const time = new Date()
